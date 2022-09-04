@@ -10,8 +10,6 @@ Table of contents
 
 EConnect is wrapper library for `System.Data.Common.DbConnection` for parsing SQL query results to supported by the library .NET types. 
 
-**Note** The current version of `EConnect` is .NET 5 for legacy reasons.
-
 ## Use cases
 
 ### Query for multiple results:
