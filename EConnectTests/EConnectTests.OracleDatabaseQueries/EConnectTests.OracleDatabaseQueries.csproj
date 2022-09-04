@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.70" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EConnect\EConnect\EConnect.csproj" />
+    <ProjectReference Include="..\EConnectTests.Models\EConnectTests.Models.csproj" />
+    <ProjectReference Include="..\EConnectTests.SettingParser\EConnectTests.SettingParser.csproj" />
+    <ProjectReference Include="..\EConnectTests.Settings\EConnectTests.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
