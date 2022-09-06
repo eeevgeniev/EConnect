@@ -62,7 +62,8 @@ namespace EConnectTests.Benchmarks
             List<StructModel> third = QueryEConnectForStruct(setting.ConnectionString);
             List<Dictionary<string, object>> fourth = QueryEConnectWithDictionary(setting.ConnectionString);
             List<Model> fifth = QueryEConnectWithCustomParser(setting.ConnectionString);
-            (List<Model> models, List<int> integers, List<string> strings, List<DateTime> dates, List<decimal> decimals, List<long> longs) six = QueryMultipleValues(setting.ConnectionString);
+            (List<Model> models, List<int> integers, List<string> strings, List<DateTime> dates, List<decimal> decimals, List<long> longs) sixth = QueryMultipleValues(setting.ConnectionString);
+            List<dynamic> seventh = QueryEConnectWithDynamic(setting.ConnectionString);
 
             Debug.Assert(first.Count == second.ToList().Count);
 
@@ -84,15 +85,22 @@ namespace EConnectTests.Benchmarks
 
             Debug.Assert(first.SequenceEqual(fifth));
 
-            Debug.Assert(first.SequenceEqual(six.models));
+            Debug.Assert(first.SequenceEqual(sixth.models));
 
-            for (int i = 0; i < six.models.Count; i++)
+            for (int i = 0; i < sixth.models.Count; i++)
             {
-                Debug.Assert(six.models[i].Id == six.integers[i]);
-                Debug.Assert(six.models[i].Strp == six.strings[i]);
-                Debug.Assert(six.models[i].Date == six.dates[i]);
-                Debug.Assert(six.models[i].Dcml == six.decimals[i]);
-                Debug.Assert(six.models[i].Lng == six.longs[i]);
+                Debug.Assert(sixth.models[i].Id == sixth.integers[i]);
+                Debug.Assert(sixth.models[i].Strp == sixth.strings[i]);
+                Debug.Assert(sixth.models[i].Date == sixth.dates[i]);
+                Debug.Assert(sixth.models[i].Dcml == sixth.decimals[i]);
+                Debug.Assert(sixth.models[i].Lng == sixth.longs[i]);
+            }
+
+            Debug.Assert(first.Count == seventh.Count);
+
+            for(int i = 0; i < first.Count; i++)
+            {
+                first[i].Equals(seventh[i]);
             }
 #endif
 
@@ -201,11 +209,31 @@ namespace EConnectTests.Benchmarks
             return models;
         }
 
+        private static List<dynamic> QueryEConnectWithDynamic(string connectionString)
+        {
+            List<dynamic> models = null;
+
+            using (Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(connectionString))
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                models = connection.Query<dynamic>("SELECT * FROM models ORDER BY id LIMIT 98989 OFFSET 1011;", null);
+
+                stopwatch.Stop();
+
+                Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            }
+
+            Console.WriteLine(models?.Count);
+
+            return models;
+        }
+
         private static (List<Model> models, List<int> integers, List<string> strings, List<DateTime> dates, List<decimal> decimals, List<long> longs) QueryMultipleValues(string connectionString)
         {
             (List<Model> models, List<int> integers, List<string> strings, List<DateTime> times, List<decimal> decimals, List<long> longs) result;
-
-            Connection<NpgsqlConnection>.AddOrUpdateParser(new ModelParser());
 
             using (Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(connectionString))
             {
@@ -222,8 +250,6 @@ namespace EConnectTests.Benchmarks
 
                 stopwatch.Stop();
 
-                connection.ClearParsers();
-
                 Console.WriteLine(stopwatch.ElapsedMilliseconds);
             }
 
@@ -239,7 +265,7 @@ namespace EConnectTests.Benchmarks
                                         id INTEGER GENERATED ALWAYS AS IDENTITY,
                                         strp TEXT,
                                         chr TEXT,
-                                        char TEXT,
+                                        character TEXT,
                                         date TIMESTAMPTZ,
                                         ndate TIMESTAMPTZ,
                                         strs TEXT,
@@ -276,14 +302,14 @@ namespace EConnectTests.Benchmarks
                         model.Lng = random.Next(0, 1000000);
 
                         connection.Query(@"INSERT INTO models
-                            (strp, chr, char, date, ndate, strs, strw, dcml, lng)
+                            (strp, chr, character, date, ndate, strs, strw, dcml, lng)
                         VALUES
-                            (@strp, @chr, @char, @date, @ndate, @strs, @strw, @dcml, @lng)",
+                            (@strp, @chr, @character, @date, @ndate, @strs, @strw, @dcml, @lng)",
                         new List<SqlEParameter>()
                         {
                             new SqlEParameter("@strp", model.Strp),
                             new SqlEParameter("@chr", model.Chr),
-                            new SqlEParameter("@char", model.Char),
+                            new SqlEParameter("@character", model.Character),
                             new SqlEParameter("@date", model.Date),
                             new SqlEParameter("@ndate", model.NDate),
                             new SqlEParameter("@strs", model.Strs),

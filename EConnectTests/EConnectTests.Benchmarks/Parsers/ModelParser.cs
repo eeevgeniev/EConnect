@@ -31,9 +31,9 @@ namespace EConnectTests.Benchmarks.Parsers
                     {
                         model.Chr = dbDataReader.GetString(i);
                     }
-                    else if (name.Equals(nameof(Model.Char), StringComparison.OrdinalIgnoreCase))
+                    else if (name.Equals(nameof(Model.Character), StringComparison.OrdinalIgnoreCase))
                     {
-                        model.Char = dbDataReader.GetString(i);
+                        model.Character = dbDataReader.GetString(i);
                     }
                     else if (name.Equals(nameof(Model.Date), StringComparison.OrdinalIgnoreCase))
                     {
@@ -88,9 +88,9 @@ namespace EConnectTests.Benchmarks.Parsers
                     {
                         model.Chr = dbDataReader.GetString(i);
                     }
-                    else if (name.Equals(nameof(Model.Char), StringComparison.OrdinalIgnoreCase))
+                    else if (name.Equals(nameof(Model.Character), StringComparison.OrdinalIgnoreCase))
                     {
-                        model.Char = dbDataReader.GetString(i);
+                        model.Character = dbDataReader.GetString(i);
                     }
                     else if (name.Equals(nameof(Model.Date), StringComparison.OrdinalIgnoreCase))
                     {

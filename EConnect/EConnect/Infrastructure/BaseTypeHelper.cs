@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 
 namespace EConnect.Infrastructure
@@ -78,5 +79,7 @@ namespace EConnect.Infrastructure
         internal static Type StreamType => typeof(Stream);
 
         internal static Type DictionaryType => typeof(Dictionary<string, object>);
+
+        internal static Type ObjectType => typeof(object);
     }
 }

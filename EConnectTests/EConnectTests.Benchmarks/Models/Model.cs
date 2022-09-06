@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -12,7 +13,8 @@ namespace EConnectTests.Benchmarks.Models
 
         public string Chr { get; set; }
 
-        public string Char { get; set; }
+        [JsonProperty(PropertyName = "char")]
+        public string Character { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -36,7 +38,7 @@ namespace EConnectTests.Benchmarks.Models
             return this.Id == other.Id &&
                 string.Equals(this.Strp, other.Strp, StringComparison.OrdinalIgnoreCase) &&
                 string.Equals(this.Chr, other.Chr, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(this.Char, other.Char, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(this.Character, other.Character, StringComparison.OrdinalIgnoreCase) &&
                 this.Date.Equals(other.Date) &&
                 this.NDate.Equals(other.NDate) &&
                 string.Equals(this.Strs, other.Strs, StringComparison.OrdinalIgnoreCase) &&
@@ -69,7 +71,7 @@ namespace EConnectTests.Benchmarks.Models
                 return false;
             }
 
-            if (!(other.TryGetValue(nameof(this.Char), out value) || other.TryGetValue(nameof(this.Char).ToLower(), out value)) || !(value is string charValue))
+            if (!(other.TryGetValue(nameof(this.Character), out value) || other.TryGetValue(nameof(this.Character).ToLower(), out value)) || !(value is string charValue))
             {
                 return false;
             }
@@ -107,7 +109,7 @@ namespace EConnectTests.Benchmarks.Models
             return this.Id == idValue &&
                 string.Equals(this.Strp, strpValue, StringComparison.OrdinalIgnoreCase) &&
                 string.Equals(this.Chr, chrValue, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(this.Char, charValue, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(this.Character, charValue, StringComparison.OrdinalIgnoreCase) &&
                 this.Date.Equals(dateValue) &&
                 this.NDate.Equals(nDateValue) &&
                 string.Equals(this.Strs, strsValue, StringComparison.OrdinalIgnoreCase) &&
@@ -126,7 +128,7 @@ namespace EConnectTests.Benchmarks.Models
             return this.Id == other.Id &&
                 string.Equals(this.Strp, other.Strp, StringComparison.OrdinalIgnoreCase) &&
                 string.Equals(this.Chr, other.Chr, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(this.Char, other.Char, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(this.Character, other.Character, StringComparison.OrdinalIgnoreCase) &&
                 this.Date.Equals(other.Date) &&
                 this.NDate.Equals(other.NDate) &&
                 string.Equals(this.Strs, other.Strs, StringComparison.OrdinalIgnoreCase) &&
@@ -134,5 +136,28 @@ namespace EConnectTests.Benchmarks.Models
                 this.Dcml == other.Dcml &&
                 this.Lng == other.Lng;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            dynamic other = obj;
+
+            return this.Id == other.id &&
+                string.Equals(this.Strp, other.strp, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(this.Chr, other.chr, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(this.Character, other.character, StringComparison.OrdinalIgnoreCase) &&
+                this.Date.Equals(other.date) &&
+                this.NDate.Equals(other.ndate) &&
+                string.Equals(this.Strs, other.strs, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(this.Strw, other.strw, StringComparison.OrdinalIgnoreCase) &&
+                this.Dcml == other.dcml &&
+                this.Lng == other.lng;
+        }
+
+        public override int GetHashCode() => this.Id.GetHashCode();
     }
 }

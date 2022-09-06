@@ -56,6 +56,58 @@ namespace EConnectTests.Benchmarks.Tests
         }
 
         [Benchmark]
+        public List<Dictionary<string, object>> SmallQueryEConnectDict()
+        {
+            List<Dictionary<string, object>> models = null;
+
+            using (Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(this._setting.ConnectionString))
+            {
+                models = connection.Query<Dictionary<string, object>>(SMALLLISTQUERY, null);
+            }
+
+            return models;
+        }
+
+        [Benchmark]
+        public List<Dictionary<string, object>> LargeQueryEConnectDict()
+        {
+            List<Dictionary<string, object>> models = null;
+
+            using (Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(this._setting.ConnectionString))
+            {
+                models = connection.Query<Dictionary<string, object>>(LARGELISTQUERY, null);
+            }
+
+            return models;
+        }
+
+        [Benchmark]
+        public List<dynamic> SmallQueryEConnectDynamic()
+        {
+            List<dynamic> models = null;
+
+            using (Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(this._setting.ConnectionString))
+            {
+                models = connection.Query<dynamic>(SMALLLISTQUERY, null);
+            }
+
+            return models;
+        }
+
+        [Benchmark]
+        public List<dynamic> LargeQueryEConnectDynamic()
+        {
+            List<dynamic> models = null;
+
+            using (Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(this._setting.ConnectionString))
+            {
+                models = connection.Query<dynamic>(LARGELISTQUERY, null);
+            }
+
+            return models;
+        }
+
+        [Benchmark]
         public List<string> LargeStringQueryEConnect()
         {
             List<string> strings = null;

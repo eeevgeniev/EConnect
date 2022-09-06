@@ -159,6 +159,10 @@ namespace EConnect.ParserFactories
             {
                 return new NullableULongParser();
             }
+            else if (modelType == BaseTypeHelper.ObjectType)
+            {
+                return new ExpandoObjectParser();
+            }
 
             return new ObjectParser<TModel>();
         }

@@ -130,6 +130,18 @@ namespace EConnectTests.SQLiteQueries
             CheckDict(dictResults);
         }
 
+        private static void GetDynamic(string connectionString)
+        {
+            List<dynamic> dictResults;
+
+            using (Connection<SqliteConnection> connection = new Connection<SqliteConnection>(connectionString))
+            {
+                dictResults = connection.Query<dynamic>(COMMAND, null);
+            }
+
+            CheckDynamic(dictResults);
+        }
+
         private static void GetByte(string connectionString)
         {
             string command = "SELECT ByteNumber FROM GenericTable";
@@ -698,6 +710,17 @@ namespace EConnectTests.SQLiteQueries
             Debug.Assert(hasResult == true);
 
             CheckSingleDict(dict);
+        }
+
+        private static void GetSingleDynamic(string connectionString)
+        {
+            using Connection<SqliteConnection> connection = new Connection<SqliteConnection>(connectionString);
+
+            var (hasResult, result) = connection.Single<dynamic>(SINGLECOMMAND, null);
+
+            Debug.Assert(hasResult == true);
+
+            CheckSingleDynamic(result);
         }
 
         private static void GetSingleByte(string connectionString)
@@ -1526,6 +1549,351 @@ namespace EConnectTests.SQLiteQueries
             }
         }
 
+        private static void CheckDynamic(List<dynamic> results)
+        {
+            Debug.Assert(results.Count == 2);
+
+            if (results[0].ByteNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ByteNumber)} is not null.");
+            }
+
+            if (results[0].NullableByteNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableByteNumber)} is not null.");
+            }
+
+            if (results[0].BoolValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.BoolValue)} is not null.");
+            }
+
+            if (results[0].NullableBoolValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableBoolValue)} is not null.");
+            }
+
+            if (results[0].Bytes != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Bytes)} is not null.");
+            }
+
+            if (results[0].Chars != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Chars)} is not null.");
+            }
+
+            if (results[0].Letter != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Letter)} is not null.");
+            }
+
+            if (results[0].NullableLetter != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableLetter)} is not null.");
+            }
+
+            if (results[0].DateTimeValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DateTimeValue)} is not null.");
+            }
+
+            if (results[0].NullableDateTimeValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDateTimeValue)} is not null.");
+            }
+
+            if (results[0].DecimalNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DecimalNumber)} is not null.");
+            }
+
+            if (results[0].NullableDecimalNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDecimalNumber)} is not null.");
+            }
+
+            if (results[0].DoubleNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DoubleNumber)} is not null.");
+            }
+
+            if (results[0].NullableDoubleNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDoubleNumber)} is not null.");
+            }
+
+            if (results[0].FloatNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.FloatNumber)} is not null.");
+            }
+
+            if (results[0].NullableFloatNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableFloatNumber)} is not null.");
+            }
+
+            if (results[0].GuidValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.GuidValue)} is not null.");
+            }
+
+            if (results[0].NullableGuidValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableGuidValue)} is not null.");
+            }
+
+            if (results[0].IntNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.IntNumber)} is not null.");
+            }
+
+            if (results[0].NullableIntNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableIntNumber)} is not null.");
+            }
+
+            if (results[0].LongNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.LongNumber)} is not null.");
+            }
+
+            if (results[0].NullableLongNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableLongNumber)} is not null.");
+            }
+
+            if (results[0].SByteNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.SByteNumber)} is not null.");
+            }
+
+            if (results[0].NullableSByteNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableSByteNumber)} is not null.");
+            }
+
+            if (results[0].ShortNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ShortNumber)} is not null.");
+            }
+
+            if (results[0].NullableShortNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableShortNumber)} is not null.");
+            }
+
+            if (results[0].StreamValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.StreamValue)} is not null.");
+            }
+
+            if (results[0].StringValue != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.StringValue)} is not null.");
+            }
+
+            if (results[0].UIntNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.UIntNumber)} is not null.");
+            }
+
+            if (results[0].NullableUIntNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableUIntNumber)} is not null.");
+            }
+
+            if (results[0].ULongNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ULongNumber)} is not null.");
+            }
+
+            if (results[0].NullableULongNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableULongNumber)} is not null.");
+            }
+
+            if (results[0].UShortNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.UShortNumber)} is not null.");
+            }
+
+            if (results[0].NullableUShortNumber != null)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableUShortNumber)} is not null.");
+            }
+
+            if (results[1].ByteNumber != Constants.ByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ByteNumber)} is not equal to {Constants.ByteNumber2}.");
+            }
+
+            if (results[1].NullableByteNumber != Constants.NullableByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableByteNumber)} is not equal to {Constants.NullableByteNumber2}.");
+            }
+
+            if (results[1].BoolValue != Constants.BoolValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.BoolValue)} is not equal to {Constants.BoolValue2}.");
+            }
+
+            if (results[1].NullableBoolValue != Constants.NullableBoolValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableBoolValue)} is not equal to {Constants.NullableBoolValue2}.");
+            }
+
+            if (!Constants.Bytes2.SequenceEqual((byte[])results[1].Bytes))
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Bytes)} is not equal to {Constants.Bytes2}.");
+            }
+
+            if (!Constants.Chars2.SequenceEqual((char[])results[1].Chars.ToString().ToCharArray()))
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Chars)} is not equal to {Constants.Chars2}.");
+            }
+
+            if (results[1].Letter != Constants.Letter2.ToString())
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Letter)} is not equal to {Constants.Letter2}.");
+            }
+
+            if (results[1].NullableLetter != Constants.NullableLetter2?.ToString())
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableLetter)} is not equal to {Constants.NullableLetter2}.");
+            }
+
+            if (results[1].DateTimeValue != Constants.DateTimeValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DateTimeValue)} is not equal to {Constants.DateTimeValue2}.");
+            }
+
+            if (results[1].NullableDateTimeValue != Constants.NullableDateTimeValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDateTimeValue)} is not equal to {Constants.NullableDateTimeValue2}.");
+            }
+
+            if (results[1].DecimalNumber != Constants.DecimalNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DecimalNumber)} is not equal to {Constants.DecimalNumber2}.");
+            }
+
+            if (results[1].NullableDecimalNumber != Constants.NullableDecimalNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDecimalNumber)} is not equal to {Constants.NullableDecimalNumber2}.");
+            }
+
+            if (results[1].DoubleNumber != Constants.DoubleNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DoubleNumber)} is not equal to {Constants.DoubleNumber2}.");
+            }
+
+            if (results[1].NullableDoubleNumber != Constants.NullableDoubleNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDoubleNumber)} is not equal to {Constants.NullableDoubleNumber2}.");
+            }
+
+            if (results[1].FloatNumber != Constants.FloatNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.FloatNumber)} is not equal to {Constants.FloatNumber2}.");
+            }
+
+            if (results[1].NullableFloatNumber != Constants.NullableFloatNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableFloatNumber)} is not equal to {Constants.NullableFloatNumber2}.");
+            }
+
+            if (results[1].GuidValue != Constants.GuidValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.GuidValue)} is not equal to {Constants.GuidValue2}.");
+            }
+
+            if (results[1].NullableGuidValue != Constants.NullableGuidValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableGuidValue)} is not equal to {Constants.NullableGuidValue2}.");
+            }
+
+            if (results[1].IntNumber != Constants.IntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.IntNumber)} is not equal to {Constants.IntNumber2}.");
+            }
+
+            if (results[1].NullableIntNumber != Constants.NullableIntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableIntNumber)} is not equal to {Constants.NullableIntNumber2}.");
+            }
+
+            if (results[1].LongNumber != Constants.LongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.LongNumber)} is not equal to {Constants.LongNumber2}.");
+            }
+
+            if (results[1].NullableLongNumber != Constants.NullableLongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableLongNumber)} is not equal to {Constants.NullableLongNumber2}.");
+            }
+
+            if (results[1].SByteNumber != Constants.SByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.SByteNumber)} is not equal to {Constants.SByteNumber2}.");
+            }
+
+            if (results[1].NullableSByteNumber != Constants.NullableSByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableSByteNumber)} is not equal to {Constants.NullableSByteNumber2}.");
+            }
+
+            if (results[1].ShortNumber != Constants.ShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ShortNumber)} is not equal to {Constants.ShortNumber2}.");
+            }
+
+            if (results[1].NullableShortNumber != Constants.NullableShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableShortNumber)} is not equal to {Constants.NullableShortNumber2}.");
+            }
+
+            if (!Constants.StreamValue2.SequenceEqual((byte[])results[1].StreamValue))
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.StreamValue)} is not equal to {Constants.StreamValue2}.");
+            }
+
+            if (results[1].StringValue != Constants.StringValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.StringValue)} is not equal to {Constants.StringValue2}.");
+            }
+
+            if (results[1].UIntNumber != Constants.UIntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.UIntNumber)} is not equal to {Constants.UIntNumber2}.");
+            }
+
+            if (results[1].NullableUIntNumber != Constants.NullableUIntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableUIntNumber)} is not equal to {Constants.NullableUIntNumber2}.");
+            }
+
+            if (results[1].ULongNumber != Constants.ULongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ULongNumber)} is not equal to {Constants.ULongNumber2}.");
+            }
+
+            if (results[1].NullableULongNumber != Constants.NullableULongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableULongNumber)} is not equal to {Constants.NullableULongNumber2}.");
+            }
+
+            if (results[1].UShortNumber != Constants.UShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.UShortNumber)} is not equal to {Constants.UShortNumber2}.");
+            }
+
+            if (results[1].NullableUShortNumber != Constants.NullableUShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableUShortNumber)} is not equal to {Constants.NullableUShortNumber2}.");
+            }
+        }
+
         private static void CheckSingleObject(GenericTable genericTable)
         {
             Debug.Assert(genericTable.ByteNumber == Constants.ByteNumber2);
@@ -1712,6 +2080,179 @@ namespace EConnectTests.SQLiteQueries
                 {
                     throw new Exception("Unexpected key: " + key);
                 }
+            }
+        }
+
+        private static void CheckSingleDynamic(dynamic value)
+        {
+            if (value.ByteNumber != Constants.ByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ByteNumber)} is not equal to {Constants.ByteNumber2}.");
+            }
+
+            if (value.NullableByteNumber != Constants.NullableByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableByteNumber)} is not equal to {Constants.NullableByteNumber2}.");
+            }
+
+            if (value.BoolValue != Constants.BoolValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.BoolValue)} is not equal to {Constants.BoolValue2}.");
+            }
+
+            if (value.NullableBoolValue != Constants.NullableBoolValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableBoolValue)} is not equal to {Constants.NullableBoolValue2}.");
+            }
+
+            if (!Constants.Bytes2.SequenceEqual((byte[])value.Bytes))
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Bytes)} is not equal to {Constants.Bytes2}.");
+            }
+
+            if (!Constants.Chars2.SequenceEqual((char[])value.Chars.ToString().ToCharArray()))
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Chars)} is not equal to {Constants.Chars2}.");
+            }
+
+            if (value.Letter != Constants.Letter2.ToString())
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.Letter)} is not equal to {Constants.Letter2}.");
+            }
+
+            if (value.NullableLetter != Constants.NullableLetter2?.ToString())
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableLetter)} is not equal to {Constants.NullableLetter2}.");
+            }
+
+            if (value.DateTimeValue != Constants.DateTimeValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DateTimeValue)} is not equal to {Constants.DateTimeValue2}.");
+            }
+
+            if (value.NullableDateTimeValue != Constants.NullableDateTimeValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDateTimeValue)} is not equal to {Constants.NullableDateTimeValue2}.");
+            }
+
+            if (value.DecimalNumber != Constants.DecimalNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DecimalNumber)} is not equal to {Constants.DecimalNumber2}.");
+            }
+
+            if (value.NullableDecimalNumber != Constants.NullableDecimalNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDecimalNumber)} is not equal to {Constants.NullableDecimalNumber2}.");
+            }
+
+            if (value.DoubleNumber != Constants.DoubleNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.DoubleNumber)} is not equal to {Constants.DoubleNumber2}.");
+            }
+
+            if (value.NullableDoubleNumber != Constants.NullableDoubleNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableDoubleNumber)} is not equal to {Constants.NullableDoubleNumber2}.");
+            }
+
+            if (value.FloatNumber != Constants.FloatNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.FloatNumber)} is not equal to {Constants.FloatNumber2}.");
+            }
+
+            if (value.NullableFloatNumber != Constants.NullableFloatNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableFloatNumber)} is not equal to {Constants.NullableFloatNumber2}.");
+            }
+
+            if (value.GuidValue != Constants.GuidValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.GuidValue)} is not equal to {Constants.GuidValue2}.");
+            }
+
+            if (value.NullableGuidValue != Constants.NullableGuidValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableGuidValue)} is not equal to {Constants.NullableGuidValue2}.");
+            }
+
+            if (value.IntNumber != Constants.IntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.IntNumber)} is not equal to {Constants.IntNumber2}.");
+            }
+
+            if (value.NullableIntNumber != Constants.NullableIntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableIntNumber)} is not equal to {Constants.NullableIntNumber2}.");
+            }
+
+            if (value.LongNumber != Constants.LongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.LongNumber)} is not equal to {Constants.LongNumber2}.");
+            }
+
+            if (value.NullableLongNumber != Constants.NullableLongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableLongNumber)} is not equal to {Constants.NullableLongNumber2}.");
+            }
+
+            if (value.SByteNumber != Constants.SByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.SByteNumber)} is not equal to {Constants.SByteNumber2}.");
+            }
+
+            if (value.NullableSByteNumber != Constants.NullableSByteNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableSByteNumber)} is not equal to {Constants.NullableSByteNumber2}.");
+            }
+
+            if (value.ShortNumber != Constants.ShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ShortNumber)} is not equal to {Constants.ShortNumber2}.");
+            }
+
+            if (value.NullableShortNumber != Constants.NullableShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableShortNumber)} is not equal to {Constants.NullableShortNumber2}.");
+            }
+
+            if (!Constants.StreamValue2.SequenceEqual((byte[])value.StreamValue))
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.StreamValue)} is not equal to {Constants.StreamValue2}.");
+            }
+
+            if (value.StringValue != Constants.StringValue2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.StringValue)} is not equal to {Constants.StringValue2}.");
+            }
+
+            if (value.UIntNumber != Constants.UIntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.UIntNumber)} is not equal to {Constants.UIntNumber2}.");
+            }
+
+            if (value.NullableUIntNumber != Constants.NullableUIntNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableUIntNumber)} is not equal to {Constants.NullableUIntNumber2}.");
+            }
+
+            if (value.ULongNumber != Constants.ULongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.ULongNumber)} is not equal to {Constants.ULongNumber2}.");
+            }
+
+            if (value.NullableULongNumber != Constants.NullableULongNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableULongNumber)} is not equal to {Constants.NullableULongNumber2}.");
+            }
+
+            if (value.UShortNumber != Constants.UShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.UShortNumber)} is not equal to {Constants.UShortNumber2}.");
+            }
+
+            if (value.NullableUShortNumber != Constants.NullableUShortNumber2)
+            {
+                throw new InvalidDataException($"Parameter {nameof(GenericTable.NullableUShortNumber)} is not equal to {Constants.NullableUShortNumber2}.");
             }
         }
 

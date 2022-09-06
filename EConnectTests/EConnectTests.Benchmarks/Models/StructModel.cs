@@ -11,7 +11,7 @@ namespace EConnectTests.Benchmarks.Models
 
         public string Chr { get; set; }
 
-        public string Char { get; set; }
+        public string Character { get; set; }
 
         public DateTime Date { get; set; }
 
