@@ -5,7 +5,8 @@ Table of contents
 
 1. [Use cases](#use-cases)
 2. [Supported types](#supported-types)
-3. [Some considerations](#some-considerations)
+3. [Resposity structure](#reposity-structure)
+4. [Some considerations](#some-considerations)
 
 
 EConnect is wrapper library for `System.Data.Common.DbConnection` for parsing SQL query results to supported by the library .NET types. 
@@ -104,6 +105,25 @@ Type Type();
 
 **Note** The parsers are stored in static container to be used by all instances.
 
+### Dynamic and object support
+Support for `dynamic` and `object` with `System.Dynamic.ExpandoObject`. 
+```
+    using Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(connectionString);
+    var models = connection.Query<dynamic>("SELECT * FROM models;", null);
+```
+
+```
+    using Connection<NpgsqlConnection> connection = new Connection<NpgsqlConnection>(connectionString);
+    var objects = connection.Query<object>("SELECT * FROM models;", null);
+```
+
+**Note** if you want to access objects list you must cast it to `System.Dynamic.ExpandoObject` or `dynamic`.
+
+For single query
+```
+    (bool hasResult, dynamic result) x = connection.Single<dynamic>("SELECT * FROM models ORDER BY id LIMIT 1;", null);
+```
+
 ### Clearing all parsers
 
 Instance method:
@@ -180,6 +200,39 @@ List<Dictionary<string, object>> models = connection.Query<Dictionary<string, ob
 For every record in the `DbDataReader` a new `Dictionary<string, object>` is created where the key is the column name and the value is the row value of the `DbDataReader`.
 
 `Object` and `Struct` results are parsed based on either their public type properties or public type fields. First are checked the public properties if there are no public properties then are checked the public fields. When the instance of class or struct is created, it is used the constructor with least parameters. This constructor must accept default values for parameters.
+
+## Reposity structure
+
+The solution contains 3 projects:
+1. `EConnect` - main project;
+2. `EConnectTests` - project with test against databases;
+3. `EConnectUnitTests` - project with unit tests;
+
+`EConnect` contains:
+* Directory `Infrastructure` - contains various helpers;
+* Directory `Interfaces` - contains various `Interfaces`;
+* Directory `ParserFactories` - contains the main class for creating parsers;
+* Directory `Parsers` - contains all classes for parsing;
+* Class `Connection` - main class used by the library;
+* Class `SqlEParameter` - main class for using SQL parameters;
+
+`EConnectTests` contains:
+* `EConnectTests.Benchmarks` project - used to run benchmarks in either `Develop` environment or `Release` environment. In `Release` environment the test are run with `BenchmarkDotNet` library;
+* `EConnectTests.Models` project - with some model-classes used by the other projects;
+* `EConnectTests.MySQLQueries` project - with tests for MySQL;
+* `EConnectTests.OracleDatabaseQueries` project - with tesst for Oracle;
+* `EConnectTests.PostgreSQLQueries` project - with tests for PostgreSQL;
+* `EConnectTests.SettingParser` project - for reading `settings.json`;
+* `EConnectTests.Settings` project - `settings.json` model;
+* `EConnectTests.SQLiteQueries` project - with tests for SQLite;
+* `EConnectTests.SQLServerQueries` project - with tests for SQLServer;
+
+**Note** every project has `settings.json` with property `ConnectionString` where the connection string must be entered. It's empty by default.
+
+`EConnectUnitTests` contains:
+Projects with unit tests which are organized by type. For example: `QueryBoolTests` contains tests for `Boolean` and `Boolean?` types and all queries. And `SingleBoolTests` contains tests for `Boolean` and `Boolean?` but only for single queries. There are some helper directories like:
+* `Mockups` for some mockups;
+* `TestModels` for some tests models;
 
 ## Some considerations
 
