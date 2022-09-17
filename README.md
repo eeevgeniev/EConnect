@@ -75,7 +75,7 @@ Where
 
 **Note** currently up to 10 results are supported.
 
-**Note** every mehtod has alternative async method with the same name and postfix 'Async'
+**Note** every mehtod has alternative async method with the same name and postfix 'Async'.
 
 ### Adding or replacing parser with custom one:
 
@@ -175,9 +175,10 @@ Currently the supported types are:
 32. Byte[] - with `DbDataReader.GetBytes`;
 33. Char[] - with `DbDataReader.GetChars`;
 34. Stream - with `DbDataReader.GetStream`. **Note** the result is stored in `MemoryStream`;
-35. Object - custom classes/models;
-36. Struct - custom classes/models;
+35. Custom classes - custom classes/models;
+36. Custom structs - custom classes/models;
 37. Dictionary<string, object> - generic result;
+38. Object and dynamic with `System.Dynamic.ExpandoObject`
 
 For all types except `Object`, `Struct` and `Dictionary<string, object>` the first selected column from the SQL query must be from compatible type. Only the first column is checked.
 For example:
