@@ -5,7 +5,7 @@ Table of contents
 
 1. [Use cases](#use-cases)
 2. [Supported types](#supported-types)
-3. [Resposity structure](#reposity-structure)
+3. [Repository description](#reposity-description)
 4. [Some considerations](#some-considerations)
 
 
@@ -24,7 +24,7 @@ List<Model> models = connection.Query<Model>(commandText, new List<SqlEParameter
 Where:
 1. `connectionString` is SQL connection string;
 2. `useTransaction` is `boolean` value, which by default is `false`. If `true` the `Connection` instance will wrap all queries in transaction. This transaction can be completed either by calling `CommitTransaction` of the `Connection` instance or when this instance is disposed by the `Dispose` method;
-3. `isolationLevel` - the transaction isolationLevel, by default is `null`;
+3. `isolationLevel` - the transaction isolation level, by default is `null`;
 4. `timeout` - the `CommandTimeout`, by default is `null` and it will use the default value of `CommandTimeout` property of `DbCommand` instance;
 5. commandText for example "SELECT * FROM models WHERE id = @id;" is the query command or stored procedure name if `isStoredProcedure` is `true`;
 6. SQL parameters of type `IEnumerable<SqlEParameter>` or `null`;
@@ -91,7 +91,7 @@ Static method
 Connection<SqliteConnection>.AddOrUpdateParser(new ModelParser());
 ```
 
-Where the parser must implement interface `EConnect.Interfaces.IParser<TModel>`. With the following two methods:
+Where the parser must implement interface `EConnect.Interfaces.IParser<TModel>`. With the following structure:
 
 ```
 // for multiple results
@@ -117,7 +117,7 @@ Support for `dynamic` and `object` with `System.Dynamic.ExpandoObject`.
     var objects = connection.Query<object>("SELECT * FROM models;", null);
 ```
 
-**Note** if you want to access objects list you must cast it to `System.Dynamic.ExpandoObject` or `dynamic`.
+**Note** if you want to access List<object> you must cast it to `System.Dynamic.ExpandoObject` or `dynamic`.
 
 For single query
 ```
@@ -202,7 +202,7 @@ For every record in the `DbDataReader` a new `Dictionary<string, object>` is cre
 
 `Object` and `Struct` results are parsed based on either their public type properties or public type fields. First are checked the public properties if there are no public properties then are checked the public fields. When the instance of class or struct is created, it is used the constructor with least parameters. This constructor must accept default values for parameters.
 
-## Reposity structure
+## Reposity description
 
 The solution contains 3 projects:
 1. `EConnect` - main project;

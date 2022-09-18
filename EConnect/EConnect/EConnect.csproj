@@ -7,6 +7,23 @@
 	<Product>EConnect</Product>
 	<Description>Wrapper for System.Data.Common.DbConnection for parsing SQL query results to supported .Net types.</Description>
 	<Copyright>Copyright ©2022</Copyright>
+	<GenerateDocumentationFile>False</GenerateDocumentationFile>
+	<Title>EConnect</Title>
+	<PackageProjectUrl>https://github.com/eeevgeniev/EConnect</PackageProjectUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/eeevgeniev/EConnect</RepositoryUrl>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
