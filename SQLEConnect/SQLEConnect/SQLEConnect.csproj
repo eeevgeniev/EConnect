@@ -8,7 +8,7 @@
 	<Description>Wrapper for System.Data.Common.DbConnection for parsing SQL query results to supported .Net types.</Description>
 	<Copyright>Copyright ©2022</Copyright>
 	<GenerateDocumentationFile>False</GenerateDocumentationFile>
-	<Title>EConnect</Title>
+	<Title>SQLEConnect</Title>
 	<PackageProjectUrl>https://github.com/eeevgeniev/SQLEConnect</PackageProjectUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<RepositoryUrl>https://github.com/eeevgeniev/SQLEConnect</RepositoryUrl>
