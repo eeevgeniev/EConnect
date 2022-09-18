@@ -1,5 +1,5 @@
-# EConnect 
-Project site - https://github.com/eeevgeniev/EConnect
+# SQLEConnect 
+Project site - https://github.com/eeevgeniev/SQLEConnect
 
 Table of contents
 
@@ -9,7 +9,7 @@ Table of contents
 4. [Some considerations](#some-considerations)
 
 
-EConnect is wrapper library for `System.Data.Common.DbConnection` for parsing SQL query results to supported by the library .NET types. 
+SQLEConnect is wrapper library for `System.Data.Common.DbConnection` for parsing SQL query results to supported by the library .NET types. 
 
 ## Use cases
 
@@ -91,7 +91,7 @@ Static method
 Connection<SqliteConnection>.AddOrUpdateParser(new ModelParser());
 ```
 
-Where the parser must implement interface `EConnect.Interfaces.IParser<TModel>`. With the following structure:
+Where the parser must implement interface `SQLEConnect.Interfaces.IParser<TModel>`. With the following structure:
 
 ```
 // for multiple results
@@ -205,9 +205,9 @@ For every record in the `DbDataReader` a new `Dictionary<string, object>` is cre
 ## Reposity description
 
 The solution contains 3 projects:
-1. `EConnect` - main project;
-2. `EConnectTests` - project with test against databases;
-3. `EConnectUnitTests` - project with unit tests;
+1. `SQLEConnect` - main project;
+2. `SQLEConnectTests` - project with test against databases;
+3. `SQLEConnectUnitTests` - project with unit tests;
 
 `EConnect` contains:
 * Directory `Infrastructure` - contains various helpers;
@@ -217,20 +217,20 @@ The solution contains 3 projects:
 * Class `Connection` - main class used by the library;
 * Class `SqlEParameter` - main class for using SQL parameters;
 
-`EConnectTests` contains:
-* `EConnectTests.Benchmarks` project - used to run benchmarks in either `Develop` environment or `Release` environment. In `Release` environment the test are run with `BenchmarkDotNet` library;
-* `EConnectTests.Models` project - with some model-classes used by the other projects;
-* `EConnectTests.MySQLQueries` project - with tests for MySQL;
-* `EConnectTests.OracleDatabaseQueries` project - with tesst for Oracle;
-* `EConnectTests.PostgreSQLQueries` project - with tests for PostgreSQL;
-* `EConnectTests.SettingParser` project - for reading `settings.json`;
-* `EConnectTests.Settings` project - `settings.json` model;
-* `EConnectTests.SQLiteQueries` project - with tests for SQLite;
-* `EConnectTests.SQLServerQueries` project - with tests for SQLServer;
+`SQLEConnectTests` contains:
+* `SQLEConnectTests.Benchmarks` project - used to run benchmarks in either `Develop` environment or `Release` environment. In `Release` environment the test are run with `BenchmarkDotNet` library;
+* `SQLEConnectTests.Models` project - with some model-classes used by the other projects;
+* `SQLEConnectTests.MySQLQueries` project - with tests for MySQL;
+* `SQLEConnectTests.OracleDatabaseQueries` project - with tesst for Oracle;
+* `SQLEConnectTests.PostgreSQLQueries` project - with tests for PostgreSQL;
+* `SQLEConnectTests.SettingParser` project - for reading `settings.json`;
+* `SQLEConnectTests.Settings` project - `settings.json` model;
+* `SQLEConnectTests.SQLiteQueries` project - with tests for SQLite;
+* `SQLEConnectTests.SQLServerQueries` project - with tests for SQLServer;
 
 **Note** every project has `settings.json` with property `ConnectionString` where the connection string must be entered. It's empty by default.
 
-`EConnectUnitTests` contains:
+`SQLEConnectUnitTests` contains:
 Projects with unit tests which are organized by type. For example: `QueryBoolTests` contains tests for `Boolean` and `Boolean?` types and all queries. And `SingleBoolTests` contains tests for `Boolean` and `Boolean?` but only for single queries. There are some helper directories like:
 * `Mockups` for some mockups;
 * `TestModels` for some tests models;
