@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EConnect\EConnect\EConnect.csproj" />
+    <ProjectReference Include="..\EConnectTests.Models\EConnectTests.Models.csproj" />
+    <ProjectReference Include="..\EConnectTests.SettingParser\EConnectTests.SettingParser.csproj" />
+    <ProjectReference Include="..\EConnectTests.Settings\EConnectTests.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
