@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.Benchmarks", "SQLEConnectTests.Benchmarks\SQLEConnectTests.Benchmarks.csproj", "{8F4246AC-E379-4A18-8342-A48D04F2E9EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.Models", "SQLEConnectTests.Models\SQLEConnectTests.Models.csproj", "{0D9BC7EB-5662-44BD-8C2C-4A2D7802FF14}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.MySQLQueries", "SQLEConnectTests.MySQLQueries\SQLEConnectTests.MySQLQueries.csproj", "{46F1703F-4EB7-401A-A020-B38F605FF1D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.OracleDatabaseQueries", "SQLEConnectTests.OracleDatabaseQueries\SQLEConnectTests.OracleDatabaseQueries.csproj", "{A2F0B902-F90C-4274-A90B-DB387E6A654B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.PostgreSQLQueries", "SQLEConnectTests.PostgreSQLQueries\SQLEConnectTests.PostgreSQLQueries.csproj", "{6C876957-BF53-4DE8-884F-0EB3B3FCD926}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.SettingParser", "SQLEConnectTests.SettingParser\SQLEConnectTests.SettingParser.csproj", "{41FA63F4-6C4F-403A-A854-18F1D064B8DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.Settings", "SQLEConnectTests.Settings\SQLEConnectTests.Settings.csproj", "{6D5C84AF-9656-4540-87AD-1C7EFE2D6CCC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.SQLiteQueries", "SQLEConnectTests.SQLiteQueries\SQLEConnectTests.SQLiteQueries.csproj", "{F742CE32-F4B4-4700-A097-95044EB2326E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnectTests.SQLServerQueries", "SQLEConnectTests.SQLServerQueries\SQLEConnectTests.SQLServerQueries.csproj", "{5E8DC66B-80E5-4E54-8BA2-6447C93AE7D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLEConnect", "..\SQLEConnect\SQLEConnect\SQLEConnect.csproj", "{AC614339-D168-432B-A885-532496E0A243}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4246AC-E379-4A18-8342-A48D04F2E9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4246AC-E379-4A18-8342-A48D04F2E9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4246AC-E379-4A18-8342-A48D04F2E9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4246AC-E379-4A18-8342-A48D04F2E9EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D9BC7EB-5662-44BD-8C2C-4A2D7802FF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D9BC7EB-5662-44BD-8C2C-4A2D7802FF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D9BC7EB-5662-44BD-8C2C-4A2D7802FF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D9BC7EB-5662-44BD-8C2C-4A2D7802FF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F1703F-4EB7-401A-A020-B38F605FF1D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F1703F-4EB7-401A-A020-B38F605FF1D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F1703F-4EB7-401A-A020-B38F605FF1D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F1703F-4EB7-401A-A020-B38F605FF1D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F0B902-F90C-4274-A90B-DB387E6A654B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F0B902-F90C-4274-A90B-DB387E6A654B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F0B902-F90C-4274-A90B-DB387E6A654B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F0B902-F90C-4274-A90B-DB387E6A654B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C876957-BF53-4DE8-884F-0EB3B3FCD926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C876957-BF53-4DE8-884F-0EB3B3FCD926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C876957-BF53-4DE8-884F-0EB3B3FCD926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C876957-BF53-4DE8-884F-0EB3B3FCD926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41FA63F4-6C4F-403A-A854-18F1D064B8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FA63F4-6C4F-403A-A854-18F1D064B8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FA63F4-6C4F-403A-A854-18F1D064B8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FA63F4-6C4F-403A-A854-18F1D064B8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5C84AF-9656-4540-87AD-1C7EFE2D6CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5C84AF-9656-4540-87AD-1C7EFE2D6CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5C84AF-9656-4540-87AD-1C7EFE2D6CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5C84AF-9656-4540-87AD-1C7EFE2D6CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F742CE32-F4B4-4700-A097-95044EB2326E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F742CE32-F4B4-4700-A097-95044EB2326E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F742CE32-F4B4-4700-A097-95044EB2326E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F742CE32-F4B4-4700-A097-95044EB2326E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8DC66B-80E5-4E54-8BA2-6447C93AE7D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8DC66B-80E5-4E54-8BA2-6447C93AE7D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8DC66B-80E5-4E54-8BA2-6447C93AE7D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8DC66B-80E5-4E54-8BA2-6447C93AE7D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC614339-D168-432B-A885-532496E0A243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC614339-D168-432B-A885-532496E0A243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC614339-D168-432B-A885-532496E0A243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC614339-D168-432B-A885-532496E0A243}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E241C21-E707-45B3-A357-2AB6D0E4814B}
+	EndGlobalSection
+EndGlobal

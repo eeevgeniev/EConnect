@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	<Version>1.0.0.0</Version>
+	<Authors>Emiliyan Evgeniev</Authors>
+	<Product>SQLEConnect</Product>
+	<Description>Wrapper for System.Data.Common.DbConnection for parsing SQL query results to supported .Net types.</Description>
+	<Copyright>Copyright ©2022</Copyright>
+	<GenerateDocumentationFile>False</GenerateDocumentationFile>
+	<Title>EConnect</Title>
+	<PackageProjectUrl>https://github.com/eeevgeniev/SQLEConnect</PackageProjectUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/eeevgeniev/SQLEConnect</RepositoryUrl>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageTags>DbConnection wrapper; Micro ORM</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
