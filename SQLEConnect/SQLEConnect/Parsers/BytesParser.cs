@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing IEnumerable where the value is byte from DbDataReader, the IEnumerable of Byte the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class BytesParser : BaseParser, IParser<byte[]>
+    internal sealed class BytesParser : BaseParser, IParser<byte[]>
     {
         /// <summary>
         /// Returns IEnumerable where the result is IEnumerable of Byte, only the first column is checked.

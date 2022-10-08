@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing UInteger from DbDataReader, the UInteger the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class UIntegerParser : BaseParser, IParser<uint>
+    internal sealed class UIntegerParser : BaseParser, IParser<uint>
     {
         /// <summary>
         /// Returns IEnumerable where the result is UInteger, only the first column is checked.

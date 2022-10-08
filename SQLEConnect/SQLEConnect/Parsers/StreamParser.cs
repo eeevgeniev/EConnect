@@ -12,7 +12,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Short from DbDataReader, the Stream the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class StreamParser : BaseParser, IParser<Stream>
+    internal sealed class StreamParser : BaseParser, IParser<Stream>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Stream, only the first column is checked.

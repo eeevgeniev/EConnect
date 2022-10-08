@@ -12,7 +12,7 @@ namespace SQLEConnect.Parsers
     /// For every record only one the first field column is checked.
     /// The current implementation uses GetString method of DbDataReader, because in some implementations of DbDataReader the GetChar method is not implemented.
     /// </summary>
-    internal class NullableCharParser : BaseParser, IParser<char?>
+    internal sealed class NullableCharParser : BaseParser, IParser<char?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable Char, only the first column is checked.

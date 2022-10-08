@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing String from DbDataReader, the String the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class StringParser : BaseParser, IParser<string>
+    internal sealed class StringParser : BaseParser, IParser<string>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Short, only the first column is checked.

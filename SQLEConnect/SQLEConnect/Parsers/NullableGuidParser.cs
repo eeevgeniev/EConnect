@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Nullable Guid from DbDataReader, the Nullable Guid the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class NullableGuidParser : BaseParser, IParser<Guid?>
+    internal sealed class NullableGuidParser : BaseParser, IParser<Guid?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable Guid, only the first column is checked.

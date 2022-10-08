@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Nullable ULong from DbDataReader, the Nullable ULong the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class NullableULongParser : BaseParser, IParser<ulong?>
+    internal sealed class NullableULongParser : BaseParser, IParser<ulong?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable ULong, only the first column is checked.

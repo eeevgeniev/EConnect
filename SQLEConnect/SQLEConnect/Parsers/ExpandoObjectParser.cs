@@ -8,7 +8,7 @@ using System.Dynamic;
 
 namespace SQLEConnect.Parsers
 {
-    internal class ExpandoObjectParser : BaseKeyValueParser, IParser<object>
+    internal sealed class ExpandoObjectParser : BaseKeyValueParser, IParser<object>
     {
         public IEnumerable<object> Parse(DbDataReader dbDataReader)
         {

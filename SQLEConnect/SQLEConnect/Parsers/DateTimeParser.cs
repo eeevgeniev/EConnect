@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing DateTime from DbDataReader, the DateTime the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class DateTimeParser : BaseParser, IParser<DateTime>
+    internal sealed class DateTimeParser : BaseParser, IParser<DateTime>
     {
         /// <summary>
         /// Returns IEnumerable where the result is DateTime, only the first column is checked.

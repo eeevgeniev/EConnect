@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Nullable Byte from DbDataReader, the Nullable Byte the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class NullableByteParser : BaseParser, IParser<byte?>
+    internal sealed class NullableByteParser : BaseParser, IParser<byte?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable Byte, only the first column is checked.

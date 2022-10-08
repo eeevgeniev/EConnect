@@ -8,7 +8,7 @@ namespace SQLEConnect.ParserFactories
     /// <summary>
     /// Base Class for creating Parsers
     /// </summary>
-    internal class BaseParserFactory : IParserFactory
+    internal sealed class BaseParserFactory : IParserFactory
     {
         /// <summary>
         /// Returns Parser for specific Type, the default Parser is ObjectParser

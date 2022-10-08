@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 
 namespace SQLEConnect.Infrastructure
@@ -8,7 +7,7 @@ namespace SQLEConnect.Infrastructure
     /// <summary>
     /// Helper class, contains all supported types.
     /// </summary>
-    internal static class BaseTypeHelper
+    internal  static class BaseTypeHelper
     {
         internal static Type StringType => typeof(string);
 

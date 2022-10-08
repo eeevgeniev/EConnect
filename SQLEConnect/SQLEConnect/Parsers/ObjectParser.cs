@@ -16,7 +16,7 @@ namespace SQLEConnect.Parsers
     /// It uses the constructor with least parameters.
     /// The constructor must accept default values and must not throw exception.
     /// </summary>
-    internal class ObjectParser<TModel> : BaseParser, IParser<TModel>
+    internal sealed class ObjectParser<TModel> : BaseParser, IParser<TModel>
     {
         private Func<TModel> _newFunc;
         private Dictionary<string, Func<TModel, DbDataReader, int, TModel>> _funcByNames = new Dictionary<string, Func<TModel, DbDataReader, int, TModel>>();

@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing IEnumerable where the value is byte from DbDataReader, the IEnumerable of Char the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class CharsParser : BaseParser, IParser<char[]>
+    internal sealed class CharsParser : BaseParser, IParser<char[]>
     {
         /// <summary>
         /// Returns IEnumerable where the result is IEnumerable of Char, only the first column is checked.

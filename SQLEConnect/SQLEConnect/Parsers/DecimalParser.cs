@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Decimal from DbDataReader, the Decimal the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class DecimalParser : BaseParser, IParser<decimal>
+    internal sealed class DecimalParser : BaseParser, IParser<decimal>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Decimal, only the first column is checked.

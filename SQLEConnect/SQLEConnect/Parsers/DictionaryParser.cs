@@ -10,7 +10,7 @@ namespace SQLEConnect.Parsers
     /// <summary>
     /// Class for parsing Dictionary where the key is string and the value is object from DbDataReader.
     /// </summary>
-    internal class DictionaryParser : BaseKeyValueParser, IParser<Dictionary<string, object>>
+    internal sealed class DictionaryParser : BaseKeyValueParser, IParser<Dictionary<string, object>>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Dictionary where the key is string and the value is object.
