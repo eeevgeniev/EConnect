@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing ULong from DbDataReader, the ULong the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class ULongParser : BaseParser, IParser<ulong>
+    internal sealed class ULongParser : BaseParser, IParser<ulong>
     {
         /// <summary>
         /// Returns IEnumerable where the result is ULong, only the first column is checked.

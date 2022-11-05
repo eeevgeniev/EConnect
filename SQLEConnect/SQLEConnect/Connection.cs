@@ -14,7 +14,7 @@ namespace SQLEConnect
     /// Implements IConnection where Conn Is DbConnection and has empty constructor.
     /// </summary>
     /// <typeparam name="Conn">DbConnection</typeparam>
-    public class Connection<Conn> : IConnection<Conn>
+    public sealed class Connection<Conn> : IConnection<Conn>
         where Conn : DbConnection, new()
     {
         private const string AGGREGATE_EXCEPTION_MESSAGE = "Rollback exception happened. Check the inner exceptions for more information. The first is the original exception, the second is the rollback exception.";

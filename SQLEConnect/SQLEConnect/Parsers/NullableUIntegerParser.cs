@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Nullable UInteger from DbDataReader, the Nullable UInteger the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class NullableUIntegerParser : BaseParser, IParser<uint?>
+    internal sealed class NullableUIntegerParser : BaseParser, IParser<uint?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable UInteger, only the first column is checked.

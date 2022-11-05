@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Nullable UShort from DbDataReader, the Nullable UShort the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class NullableUShortParser : BaseParser, IParser<ushort?>
+    internal sealed class NullableUShortParser : BaseParser, IParser<ushort?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable UShort, only the first column is checked.

@@ -10,7 +10,7 @@ namespace SQLEConnect
     /// Implements IDataParameter and IDbDataParameter.
     /// Return correct DbParameter, based on the DbCommand type (ConvertToDbParameter method).
     /// </summary>
-    public class SqlEParameter : IDataParameter, IDbDataParameter
+    public sealed class SqlEParameter : IDataParameter, IDbDataParameter
     {
         /// <summary>
         /// Constructor to create initial SqlEParameter with parameter name and default value.

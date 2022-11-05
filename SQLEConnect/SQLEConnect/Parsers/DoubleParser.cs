@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Double from DbDataReader, the Double the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class DoubleParser : BaseParser, IParser<double>
+    internal sealed class DoubleParser : BaseParser, IParser<double>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Double, only the first column is checked.

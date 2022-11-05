@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Float from DbDataReader, the Float the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class FloatParser : BaseParser, IParser<float>
+    internal sealed class FloatParser : BaseParser, IParser<float>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Float, only the first column is checked.

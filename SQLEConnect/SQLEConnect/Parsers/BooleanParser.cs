@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Boolean values from DbDataReader, the Boolean value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class BooleanParser : BaseParser, IParser<bool>
+    internal sealed class BooleanParser : BaseParser, IParser<bool>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Boolean, only the first column is checked.

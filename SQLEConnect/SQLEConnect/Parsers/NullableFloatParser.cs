@@ -11,7 +11,7 @@ namespace SQLEConnect.Parsers
     /// Class for parsing Nullable Float from DbDataReader, the Nullable Float the value must be contained in the first field column (index 0) in the DbDataReader.
     /// For every record only one the first field column is checked.
     /// </summary>
-    internal class NullableFloatParser : BaseParser, IParser<float?>
+    internal sealed class NullableFloatParser : BaseParser, IParser<float?>
     {
         /// <summary>
         /// Returns IEnumerable where the result is Nullable Float, only the first column is checked.

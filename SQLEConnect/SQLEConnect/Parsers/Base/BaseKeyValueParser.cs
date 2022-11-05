@@ -5,7 +5,7 @@ using System.IO;
 
 namespace SQLEConnect.Parsers.Base
 {
-    internal class BaseKeyValueParser : BaseParser
+    internal abstract class BaseKeyValueParser : BaseParser
     {
         protected Func<DbDataReader, int, object> GetFunc(Type type)
         {
