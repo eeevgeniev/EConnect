@@ -15,7 +15,7 @@ namespace SQLEConnect.Parsers
             base.ValidateDbDataReader(dbDataReader);
 
             ExpandoObject expandoObject = new ExpandoObject();
-            Dictionary<int, Func<DbDataReader, int, object>> cashedFuncById = new Dictionary<int, Func<DbDataReader, int, object>>();
+            Dictionary<int, Func<DbDataReader, int, object>> cachedFuncById = new Dictionary<int, Func<DbDataReader, int, object>>();
 
             if (dbDataReader.Read())
             {
@@ -37,11 +37,11 @@ namespace SQLEConnect.Parsers
                             throw new InvalidOperationException($"Value with key {name} is already added.");
                         }
                         
-                        cashedFuncById.Add(i, func);
+                        cachedFuncById.Add(i, func);
                     }
                 }
 
-                if (cashedFuncById.Count > 0)
+                if (cachedFuncById.Count > 0)
                 {
                     yield return expandoObject;
 
@@ -49,9 +49,9 @@ namespace SQLEConnect.Parsers
                     {
                         expandoObject = new ExpandoObject();
 
-                        foreach (int i in cashedFuncById.Keys)
+                        foreach (int i in cachedFuncById.Keys)
                         {
-                            expandoObject.TryAdd(dbDataReader.GetName(i), cashedFuncById[i](dbDataReader, i));
+                            expandoObject.TryAdd(dbDataReader.GetName(i), cachedFuncById[i](dbDataReader, i));
                         }
 
                         yield return expandoObject;
