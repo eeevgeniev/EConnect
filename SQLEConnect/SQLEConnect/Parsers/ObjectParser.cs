@@ -46,7 +46,7 @@ namespace SQLEConnect.Parsers
         {
             base.ValidateDbDataReader(dbDataReader);
 
-            Dictionary<int, Func<TModel, DbDataReader, int, TModel>> cashedFuncByPosition = new Dictionary<int, Func<TModel, DbDataReader, int, TModel>>();
+            Dictionary<int, Func<TModel, DbDataReader, int, TModel>> cachedFuncByPosition = new Dictionary<int, Func<TModel, DbDataReader, int, TModel>>();
             TModel model = this._newFunc();
 
             if (dbDataReader.Read())
@@ -60,11 +60,11 @@ namespace SQLEConnect.Parsers
                     if (!string.IsNullOrWhiteSpace(name) && this._funcByNames.TryGetValue(name, out Func<TModel, DbDataReader, int, TModel> propertySetterFunc))
                     {
                         model = propertySetterFunc(model, dbDataReader, i);
-                        cashedFuncByPosition.Add(i, propertySetterFunc);
+                        cachedFuncByPosition.Add(i, propertySetterFunc);
                     }
                 }
 
-                if (cashedFuncByPosition.Count > 0)
+                if (cachedFuncByPosition.Count > 0)
                 {
                     yield return model;
 
@@ -72,9 +72,9 @@ namespace SQLEConnect.Parsers
                     {
                         model = this._newFunc();
 
-                        foreach (int index in cashedFuncByPosition.Keys)
+                        foreach (int index in cachedFuncByPosition.Keys)
                         {
-                            model = cashedFuncByPosition[index](model, dbDataReader, index);
+                            model = cachedFuncByPosition[index](model, dbDataReader, index);
                         }
 
                         yield return model;

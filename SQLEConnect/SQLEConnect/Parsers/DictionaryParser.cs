@@ -22,7 +22,7 @@ namespace SQLEConnect.Parsers
             base.ValidateDbDataReader(dbDataReader);
 
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            Dictionary<int, Func<DbDataReader, int, object>> cashedFuncById = new Dictionary<int, Func<DbDataReader, int, object>>();
+            Dictionary<int, Func<DbDataReader, int, object>> cachedFuncById = new Dictionary<int, Func<DbDataReader, int, object>>();
 
             if (dbDataReader.Read())
             {
@@ -45,11 +45,11 @@ namespace SQLEConnect.Parsers
                     if (func != null)
                     {
                         dictionary.Add(name, func(dbDataReader, i));
-                        cashedFuncById.Add(i, func);
+                        cachedFuncById.Add(i, func);
                     }
                 }
 
-                if (cashedFuncById.Count > 0)
+                if (cachedFuncById.Count > 0)
                 {
                     yield return dictionary;
 
@@ -57,9 +57,9 @@ namespace SQLEConnect.Parsers
                     {
                         dictionary = new Dictionary<string, object>();
 
-                        foreach (int i in cashedFuncById.Keys)
+                        foreach (int i in cachedFuncById.Keys)
                         {
-                            dictionary.Add(dbDataReader.GetName(i), cashedFuncById[i](dbDataReader, i));
+                            dictionary.Add(dbDataReader.GetName(i), cachedFuncById[i](dbDataReader, i));
                         }
 
                         yield return dictionary;
