@@ -511,6 +511,29 @@ namespace SQLEConnect.Interfaces
             bool isStoredProcedure, 
             bool prepareCommand);
 
+        List<TModel> QueryEntities<TModel>(EntityDescriptor<TModel> descriptor, 
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new();
+
+        Task<List<TModel>> QueryEntitiesAsync<TModel>(EntityDescriptor<TModel> descriptor,
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new();
+
+        (bool hasResult, TModel result) QuerySingleEntity<TModel>(EntityDescriptor<TModel> descriptor,
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new();
+
+        Task<(bool hasResult, TModel result)> QuerySingleEntityAsync<TModel>(EntityDescriptor<TModel> descriptor,
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new();
         #endregion
     }
 }

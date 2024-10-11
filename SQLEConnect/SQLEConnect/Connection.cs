@@ -1,5 +1,7 @@
-﻿using SQLEConnect.Interfaces;
+﻿using SQLEConnect.Entities;
+using SQLEConnect.Interfaces;
 using SQLEConnect.ParserFactories;
+using SQLEConnect.Parsers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -1044,6 +1046,78 @@ namespace SQLEConnect
             }
         }
 
+        public List<TModel> QueryEntities<TModel>(EntityDescriptor<TModel> descriptor, 
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new()
+        {
+            CheckIfObjectIsDisposed();
+
+            this.PrepareConnectionAndCommand(query, parameters, isStoredProcedure, prepareCommand);
+
+            EntityParser<TModel> parser = CreateEntityParser<TModel>(descriptor);
+
+            using (DbDataReader dbReader = this._dbCommand.ExecuteReader())
+            {
+                return new List<TModel>(parser.Parse(dbReader));
+            }
+        }
+
+        public async Task<List<TModel>> QueryEntitiesAsync<TModel>(EntityDescriptor<TModel> descriptor, 
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new()
+        {
+            CheckIfObjectIsDisposed();
+
+            this.PrepareConnectionAndCommand(query, parameters, isStoredProcedure, prepareCommand);
+
+			EntityParser<TModel> parser = CreateEntityParser<TModel>(descriptor);
+
+			using (DbDataReader dbReader = await this._dbCommand.ExecuteReaderAsync())
+            {
+                return new List<TModel>(parser.Parse(dbReader));
+            }
+        }
+
+        public (bool hasResult, TModel result) QuerySingleEntity<TModel>(EntityDescriptor<TModel> descriptor,
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new()
+        {
+            CheckIfObjectIsDisposed();
+
+            this.PrepareConnectionAndCommand(query, parameters, isStoredProcedure, prepareCommand);
+
+			EntityParser<TModel> parser = CreateEntityParser<TModel>(descriptor);
+
+			using (DbDataReader dbReader = this._dbCommand.ExecuteReader())
+            {
+                return parser.ParseSingle(dbReader);
+            }
+        }
+
+        public async Task<(bool hasResult, TModel result)> QuerySingleEntityAsync<TModel>(EntityDescriptor<TModel> descriptor,
+            string query,
+            IEnumerable<SqlEParameter> parameters,
+            bool isStoredProcedure,
+            bool prepareCommand) where TModel : new()
+        {
+            CheckIfObjectIsDisposed();
+
+            this.PrepareConnectionAndCommand(query, parameters, isStoredProcedure, prepareCommand);
+
+			EntityParser<TModel> parser = CreateEntityParser<TModel>(descriptor);
+
+			using (DbDataReader dbReader = await this._dbCommand.ExecuteReaderAsync())
+            {
+                return parser.ParseSingle(dbReader);
+            }
+        }
+
         private int ExecuteNonQuery(string query,
             IEnumerable<SqlEParameter> parameters,
             bool isStoredProcedure,
@@ -1344,7 +1418,12 @@ namespace SQLEConnect
             return parser;
         }
 
-        private void CheckIfObjectIsDisposed()
+        private EntityParser<TModel> CreateEntityParser<TModel>(EntityDescriptor<TModel> descriptor) where TModel : new() =>
+            descriptor != null ? 
+                new EntityParser<TModel>(descriptor?.GetEntity(), descriptor?.EqualityComparerExpression?.Compile()) : 
+                new EntityParser<TModel>(new Entity<TModel>(), null);
+
+		private void CheckIfObjectIsDisposed()
         {
             if (this._isDisposed)
             {
