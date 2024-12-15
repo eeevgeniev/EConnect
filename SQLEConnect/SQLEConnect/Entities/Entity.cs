@@ -9,10 +9,10 @@ namespace SQLEConnect.Entities
 	internal class Entity<TModel> : BaseObjectParser<TModel> where TModel : new()
 	{
 		private readonly List<BaseRelation> _memberEntities;
-		private readonly List<Func<TModel, TModel>> _initializers = null;
+		private readonly List<Func<TModel, TModel>> _initializers;
 
 		private readonly Func<TModel> _newFunc;
-		private readonly Dictionary<string, Func<TModel, DbDataReader, int, TModel>> _funcByNames = new Dictionary<string, Func<TModel, DbDataReader, int, TModel>>();
+		private readonly Dictionary<string, Func<TModel, DbDataReader, int, TModel>> _funcByNames;
 
 		private BaseEntityRelation<TModel> _wrapper = null;
 		private TModel _value;
@@ -22,6 +22,7 @@ namespace SQLEConnect.Entities
 		{
 			this._memberEntities = new List<BaseRelation>();
 			this._initializers = new List<Func<TModel, TModel>>();
+			this._funcByNames = new Dictionary<string, Func<TModel, DbDataReader, int, TModel>>();
 
 			this._newFunc = base.BuildNewFunc();
 			this._funcByNames = base.BuildObjectPropertiesExpressions();
@@ -32,7 +33,7 @@ namespace SQLEConnect.Entities
 			}
 		}
 
-		internal BaseEntityRelation<TModel> Wrapper { set { this._wrapper = value; } }
+		internal BaseEntityRelation<TModel> Wrapper { set => this._wrapper = value; }
 
 		internal TModel Value => this._value;
 
@@ -75,12 +76,10 @@ namespace SQLEConnect.Entities
 			if (this._cachedFuncByPosition == null)
 			{
 				this._cachedFuncByPosition = new Dictionary<int, Func<TModel, DbDataReader, int, TModel>>();
-
-				string name;
-
+				
 				for (int i = 0; i < rowDataReader.FieldCount; i++)
 				{
-					name = rowDataReader.GetName(i)?.ToLower();
+					string name = rowDataReader.GetName(i).ToLower();
 
 					if (!string.IsNullOrWhiteSpace(name) && !this._wrapper.DoesAliasExists(name) && this._funcByNames.TryGetValue(name, out Func<TModel, DbDataReader, int, TModel> propertySetterFunc))
 					{

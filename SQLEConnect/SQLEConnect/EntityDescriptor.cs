@@ -2,26 +2,23 @@
 using SQLEConnect.Relations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using SQLEConnect.Infrastructure;
 
 namespace SQLEConnect
 {
 	public class EntityDescriptor<TModel> where TModel : new()
     {
         private readonly Entity<TModel> _entity;
-        private Expression<Func<TModel, TModel, bool>> _equalityComparerExpression = null;
+        private readonly List<MemberExpression> _memberExpressions;
 
         public EntityDescriptor()
         {
             this._entity = new Entity<TModel>();
+            this._memberExpressions = new List<MemberExpression>();
         }
-
-		public EntityDescriptor(Expression<Func<TModel, TModel, bool>> equalityComparerExpression)
-            : this()
-		{
-			this._equalityComparerExpression = equalityComparerExpression;
-		}
 
 		private Type TModelType => typeof(TModel);
 
@@ -41,29 +38,12 @@ namespace SQLEConnect
 
         public EntityDescriptor<TModel> HasMemberCollection<TChild>(Expression<Func<TModel, ICollection<TChild>>> collectionMember) where TChild : new()
         {
-			this.HasMemberCollection(collectionMember, null, null);
+			this.HasMemberCollection(collectionMember, null);
 
 			return this;
 		}
-            
-
-        public EntityDescriptor<TModel> HasMemberCollection<TChild>(Expression<Func<TModel, ICollection<TChild>>> collectionMember, Expression<Func<TChild, TChild, bool>> equalityComparerExpression) where TChild : new()
-        {
-			this.HasMemberCollection(collectionMember, null, equalityComparerExpression);
-
-			return this;
-		}
-            
 
         public EntityDescriptor<TModel> HasMemberCollection<TChild>(Expression<Func<TModel, ICollection<TChild>>> collectionMember, EntityDescriptor<TChild> memberEntityDescriptor) where TChild : new()
-        {
-			this.HasMemberCollection(collectionMember, memberEntityDescriptor, null);
-
-			return this;
-		}
-            
-
-        public EntityDescriptor<TModel> HasMemberCollection<TChild>(Expression<Func<TModel, ICollection<TChild>>> collectionMember, EntityDescriptor<TChild> memberEntityDescriptor, Expression<Func<TChild, TChild, bool>> equalityComparerExpression) where TChild : new()
         {
             Type tChildType = typeof(TChild);
 
@@ -76,22 +56,49 @@ namespace SQLEConnect
 
 			Type collectionType = memberExpression.Type;
 
-			Entity<TChild> childEntity = memberEntityDescriptor == null ? new Entity<TChild>() : memberEntityDescriptor.GetEntity();
+			memberEntityDescriptor ??= new EntityDescriptor<TChild>();
+
+			Entity<TChild> childEntity = memberEntityDescriptor.GetEntity();
 
             this._entity.AddMember(new Relation<TModel, TChild>(this._entity,
 				childEntity,
                 this.CreateMemberCollectionExpression(collectionMember, tChildType, collectionType),
                 collectionMember?.Compile() ?? null,
-                equalityComparerExpression?.Compile() ?? null));
+                memberEntityDescriptor.EqualityComparerExpression?.Compile() ?? null));
 
             this.AddCollectionInitializer<TChild>(collectionMember, tChildType, collectionType);
 
 			return this;
 		}
 
+        public EntityDescriptor<TModel> HasKey<TChild>(Expression<Func<TModel, TChild>> member)
+        {
+	        MemberExpression memberExpression = member.Body as MemberExpression;
+
+	        if (memberExpression == null)
+	        {
+		        throw new InvalidOperationException();
+	        }
+	        
+	        Type childType = typeof(TChild);
+
+	        if (!childType.IsPrimitive && 
+	            childType != BaseTypeHelper.StringType && 
+	            childType != BaseTypeHelper.GuidType &&  
+	            childType != BaseTypeHelper.ByteArrayType && 
+	            childType != BaseTypeHelper.DateTimeType)
+	        {
+		        throw new Exception("Key must be a primitive, guid, byte array, date time or string.");
+	        }
+	        
+	        this._memberExpressions.Add(memberExpression);
+	        
+	        return this;
+        }
+
         internal Entity<TModel> GetEntity() => this._entity;
 
-        internal Expression<Func<TModel, TModel, bool>> EqualityComparerExpression => this._equalityComparerExpression;
+        internal Expression<Func<TModel, TModel, bool>> EqualityComparerExpression => this.GetExpression<TModel>();
 
         private Func<TModel, TChild, TModel> CreateMemberExpression<TChild>(Expression<Func<TModel, TChild>> member) where TChild : new()
         {
@@ -176,6 +183,41 @@ namespace SQLEConnect
                         Expression.Label(lblTarget, parameterTModelExpression)
                     ), new ParameterExpression[] { parameterTModelExpression }).Compile()
                 );
+        }
+
+        private Expression<Func<TMember, TMember, bool>> GetExpression<TMember>()
+        {
+	        ParameterExpression parameterXExpression = Expression.Parameter(typeof(TMember)); 
+	        ParameterExpression parameterYExpression = Expression.Parameter(typeof(TMember));
+
+	        BlockExpression blockExpression = null;
+	        
+	        if (this._memberExpressions.Count == 0)
+	        {
+		        blockExpression = Expression.Block(Expression.Constant(false));
+	        }
+	        else if (this._memberExpressions.Count == 1)
+	        {
+		        blockExpression = Expression.Block(
+			        Expression.Equal(
+				        Expression.PropertyOrField(parameterXExpression, this._memberExpressions[0].Member.Name),
+				        Expression.PropertyOrField(parameterYExpression, this._memberExpressions[0].Member.Name)));
+	        }
+	        else
+	        {
+		        blockExpression = Expression.Block(this._memberExpressions.Aggregate<MemberExpression, BinaryExpression>(null,
+			        (BinaryExpression acc, MemberExpression current) => acc != null
+				        ? Expression.AndAlso(acc, Expression.Equal(
+					        Expression.PropertyOrField(parameterXExpression, current.Member.Name),
+					        Expression.PropertyOrField(parameterYExpression, current.Member.Name)))
+				        : Expression.Equal(
+					        Expression.PropertyOrField(parameterXExpression, current.Member.Name),
+					        Expression.PropertyOrField(parameterYExpression, current.Member.Name))));
+	        }
+	        
+	        return Expression.Lambda<Func<TMember, TMember, bool>>(
+		        blockExpression, 
+		        new ParameterExpression[] { parameterXExpression, parameterYExpression });
         }
     }
 }

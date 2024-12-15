@@ -1046,7 +1046,7 @@ namespace SQLEConnect
             }
         }
 
-        public List<TModel> QueryEntities<TModel>(EntityDescriptor<TModel> descriptor, 
+        public List<TModel> Query<TModel>(EntityDescriptor<TModel> descriptor, 
             string query,
             IEnumerable<SqlEParameter> parameters,
             bool isStoredProcedure,
@@ -1064,7 +1064,7 @@ namespace SQLEConnect
             }
         }
 
-        public async Task<List<TModel>> QueryEntitiesAsync<TModel>(EntityDescriptor<TModel> descriptor, 
+        public async Task<List<TModel>> QueryAsync<TModel>(EntityDescriptor<TModel> descriptor, 
             string query,
             IEnumerable<SqlEParameter> parameters,
             bool isStoredProcedure,
@@ -1082,7 +1082,7 @@ namespace SQLEConnect
             }
         }
 
-        public (bool hasResult, TModel result) QuerySingleEntity<TModel>(EntityDescriptor<TModel> descriptor,
+        public (bool hasResult, TModel result) QuerySingle<TModel>(EntityDescriptor<TModel> descriptor,
             string query,
             IEnumerable<SqlEParameter> parameters,
             bool isStoredProcedure,
@@ -1100,7 +1100,7 @@ namespace SQLEConnect
             }
         }
 
-        public async Task<(bool hasResult, TModel result)> QuerySingleEntityAsync<TModel>(EntityDescriptor<TModel> descriptor,
+        public async Task<(bool hasResult, TModel result)> QuerySingleAsync<TModel>(EntityDescriptor<TModel> descriptor,
             string query,
             IEnumerable<SqlEParameter> parameters,
             bool isStoredProcedure,
